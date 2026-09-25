@@ -5,6 +5,10 @@ builder.Services.AddMediatR(config =>
 {
     config.RegisterServicesFromAssembly(typeof(Program).Assembly);
 });
+builder.Services.AddMarten(opts => 
+{
+    opts.Connection(builder.Configuration.GetConnectionString("DataBase")!);
+}).UseLightweightSessions();
 //builder.Services.AddMA;
 //add services to the container
 var app = builder.Build();
