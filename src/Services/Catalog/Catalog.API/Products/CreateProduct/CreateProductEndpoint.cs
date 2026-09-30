@@ -17,7 +17,7 @@ namespace Catalog.API.Products.CreateProduct
     {
         public void AddRoutes(IEndpointRouteBuilder app)
         {
-            app.MapPost("/Products",
+            app.MapPost("/products",
                 async (CreateProductRequest request ,ISender sender) => 
                 {
                     var command = request.Adapt<CreateProductCommand>();
@@ -25,12 +25,12 @@ namespace Catalog.API.Products.CreateProduct
                     var responseMap = result.Adapt<CreateProductResponse>();
                     return Results.Created($"/products/{responseMap.Id}", responseMap);
                 })
-                .WithName("CreatePRoduct")
+                .WithName("CreateProduct")
                 .Produces<CreateProductResponse>(StatusCodes.Status201Created)
                 .ProducesProblem(StatusCodes.Status400BadRequest)
                 .WithSummary("Create Product")
                 .WithDescription("Create Product");
-           // throw new NotImplementedException();
+       
         }
     }
 }
