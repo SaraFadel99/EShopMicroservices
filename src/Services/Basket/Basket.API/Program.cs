@@ -20,10 +20,15 @@ builder.Services.AddMarten(opts =>
     opts.Connection(builder.Configuration.GetConnectionString("DataBase")!);
     opts.Schema.For<ShoppingCart>().Identity(x => x.UserName);
 }).UseLightweightSessions();
+
+builder.Services.AddStackExchangeRedisCache(options => 
+{
+    options.Configuration = builder.Configuration.GetConnectionString("Redis")
+});
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
-
+builder.Services.Decorate<IBasketRepository, CachedBasketRepository>();
 
 var app = builder.Build();
 app.UseExceptionHandler(options=>{ });
