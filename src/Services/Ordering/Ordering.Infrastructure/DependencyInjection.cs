@@ -20,6 +20,7 @@ namespace Ordering.Infrastructure
             
             services.AddDbContext<ApplicationDbContext>( (sp,options) => 
             {
+                //To do have a deep dive in service provider
                 options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
                 options.UseSqlServer(connectionString);
 
