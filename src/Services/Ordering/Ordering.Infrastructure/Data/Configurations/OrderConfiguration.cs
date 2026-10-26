@@ -30,7 +30,9 @@ namespace Ordering.Infrastructure.Data.Configurations
                 .HasMaxLength(100)
                 .IsRequired();
             });
-
+            //ToDo check this complex prop as it adds columns in the same table 
+            //Is there a better practice for this  
+            // too much column in addition duplicate possibility 
             builder.ComplexProperty(
                 o => o.ShippingAddress, addresBuilder => 
                 {
