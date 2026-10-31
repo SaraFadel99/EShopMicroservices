@@ -12,7 +12,7 @@ namespace Ordering.API.Endpoints
             {
                 var command = new GetOrdersByNameQuery(orderName);
 
-                var result = sender.Send(command);
+                var result = await sender.Send(command);
 
                 var response = result.Adapt<GetOrderByNameResponse>();
 

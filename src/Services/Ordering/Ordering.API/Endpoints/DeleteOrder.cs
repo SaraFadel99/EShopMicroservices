@@ -14,7 +14,7 @@ namespace Ordering.API.Endpoints
            {
                var command = new DeleteOrderCommand(Id);
 
-               var result = sender.Send(command);
+               var result = await sender.Send(command);
 
                var response = result.Adapt<DeleteOrderResponse>();
 

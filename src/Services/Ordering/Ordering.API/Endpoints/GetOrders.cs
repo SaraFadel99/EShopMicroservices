@@ -4,7 +4,7 @@ using Ordering.Application.Orders.Queries.GetOrders;
 
 namespace Ordering.API.Endpoints
 {
-    public record GetOrdersResponse(IEnumerable<OrderDto> Orders);
+    public record GetOrdersResponse(PaginatedResult<OrderDto> Orders);
     public class GetOrders : ICarterModule
     {
         public void AddRoutes(IEndpointRouteBuilder app)
@@ -13,7 +13,7 @@ namespace Ordering.API.Endpoints
             {
                 var command = new GetOrdersQuery(request);
 
-                var result = sender.Send(command);
+                var result = await sender.Send(command);
 
                 var response = result.Adapt<GetOrdersResponse>();
 
